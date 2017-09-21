@@ -1,0 +1,49 @@
+{
+	"items": [
+				{
+					"name": "Apple", 
+					"price": 1.00, 
+					"type": "fruit"
+				},
+				{
+					"name": "Apple", 
+					"price": 1.00, 
+					"type": "fruit"
+				},
+				{
+					"name": "Apple", 
+					"price": 1.00, 
+					"type": "fruit"
+				},
+				{
+					"name": "Banana",
+					"price": 0.50,
+					"type": "fruit"
+				},
+				{
+					"name": "Orange",
+					"price": 1.50,
+					"type": "fruit"
+				},
+				{
+					"name": "Weetabix",
+					"price": 3.00,
+					"type": "cereal"
+				},
+				{
+					"name": "Kelloggs",
+					"price": 4.00,
+					"type": "cereal"
+				},
+				{
+					"name": "Coca-Cola",
+					"price": 2.00,
+					"type": "drink"
+				},
+				{
+					"name": "Pepsi",
+					"price": 3.00,
+					"type": "drink"
+				}
+			]
+}

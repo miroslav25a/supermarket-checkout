@@ -1,0 +1,25 @@
+{
+	"discounts": [
+				 	{
+				 		"type": "PERCENTAGE_OFF",
+				 		"amount": 50.00,
+				 		"itemNamesOrTypes": [
+				 			"Pepsi"
+				 		]
+				 	},
+				 	{
+				 		"type": "CHEAPEST_FREE",
+				 		"amount": 0.00,
+				 		"itemNamesOrTypes": [
+				 			"fruit"
+				 		]
+				 	},
+				 	{
+				 		"type": "TWO_FOR_PRICE",
+				 		"amount": 1.50,
+				 		"itemNamesOrTypes": [
+				 			"Apple"
+				 		]
+				 	}		 	 
+	]
+}
