@@ -2,7 +2,7 @@
 Does a supermarket checkout for a given basket and applies all given discounts.
 
 ## Motivation
-Elsevier Mendeley coding exercise 
+Elsevier Mendeley coding exercise
 
 ## Installation
 For local development:
