@@ -1,0 +1,18 @@
+{
+	"discounts": [
+					{
+						"type": "THREE_FOR_PRICE",
+						"amount": 1.00,
+						"itemNamesOrTypes": [
+							"Beans"
+						]
+					},
+				 	{
+				 		"type": "TWO_FOR_PRICE",
+				 		"amount": 1.00,
+				 		"itemNamesOrTypes": [
+				 			"Coke"
+				 		]
+				 	}		 	 
+	]
+}

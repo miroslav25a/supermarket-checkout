@@ -1,0 +1,34 @@
+{
+	"items": [
+				{
+					"name": "Beans",
+					"price": 0.50,
+					"type": "vegetable"
+				},
+				{
+					"name": "Beans",
+					"price": 0.50,
+					"type": "vegetable"
+				},
+				{
+					"name": "Beans",
+					"price": 0.50,
+					"type": "vegetable"
+				},
+				{
+					"name": "Coke",
+					"price": 0.70,
+					"type": "drink"
+				},
+				{
+					"name": "Coke",
+					"price": 0.70,
+					"type": "drink"
+				},
+				{
+					"name": "Oranges",
+					"price": 0.40,
+					"type": "fruit"
+				}
+	]
+}
