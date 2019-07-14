@@ -21,5 +21,5 @@ public interface Checkout {
 	 * @return String
 	 * 				checkout result
 	 */
-    String checkout(final Basket basket, final DeductionCollection deductionCollection);
+    String checkout(Basket basket, DeductionCollection deductionCollection);
 }

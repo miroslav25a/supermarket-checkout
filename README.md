@@ -2,7 +2,7 @@
 Does a supermarket checkout for a given basket and applies all given discounts.
 
 ## Motivation
-Elsevier Mendeley coding exercise
+Elsevier Mendeley and Policy Expert coding exercise
 
 ## Installation
 For local development:
@@ -25,7 +25,8 @@ For unit tests:
 
 * Note I: example basket.json location: /supermarket-checkout/src/main/resources/basket.json 
 * Note II: example discounts.json location: /supermarket-checkout/src/main/resources/discounts.json
-* Note III: example of java command with file paths : java -jar -Dapple.awt.UIElement="true" target/supermarket-checkout-0.0.1.jar C:\workspace\supermarket-checkout\src\main\resources\basket.json C:\workspace\supermarket-checkout\src\main\resources\discounts.json -h
+* Note III: example of java command with file paths : java -jar -Dapple.awt.UIElement="true" target/supermarket-checkout-0.0.1.jar workspace/supermarket-checkout/src/main/resources/basket.json workspace/supermarket-checkout/src/main/resources/discounts.json -h
+* Note IV: example of java command for Policy Expert: java -jar -Dapple.awt.UIElement="true" target/supermarket-checkout-0.0.1.jar workspace/supermarket-checkout/src/main/resources/policy-expert-basket.json workspace/supermarket-checkout/src/main/resources/policy-expert-discounts.json -h
 
 ## Add Discounts
 To add new discounts, edit discounts.json file and add to the list:

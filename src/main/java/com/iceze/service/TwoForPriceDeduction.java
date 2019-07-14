@@ -13,24 +13,36 @@ import com.iceze.model.Item;
  * @author Miroslav
  */
 public class TwoForPriceDeduction implements Deduction {
+	protected final int numberOfItems;
+
+	public TwoForPriceDeduction() {
+		this.numberOfItems = 2;
+	}
+
+	public TwoForPriceDeduction(final int numberOfItems) {
+		this.numberOfItems = numberOfItems;
+	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public BigDecimal deduction(Basket basket, BigDecimal amount, String item) {
+	public BigDecimal deduction(final Basket basket, final BigDecimal amount, final String item) {
 		List<Item> items = basket.getItems();
-		BigDecimal discount = new BigDecimal(0);
 		
 		List<Item> discountItems = items.stream().filter(i -> i.getName().equals(item)).collect(Collectors.toList());
-		
-		if(discountItems.size() % 2 != 0) {
+
+		if(discountItems.size() < numberOfItems) {
+			return new BigDecimal(0);
+		}
+
+		if(discountItems.size() % numberOfItems != 0) {
 			discountItems.remove(0);
 		} 
 		
 		BigDecimal totalPrice = discountItems.stream().map(Item::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
-		BigDecimal totalDiscountPrice = amount.multiply(new BigDecimal(discountItems.size() / 2));
-		discount = totalPrice.subtract(totalDiscountPrice);
+		BigDecimal totalDiscountPrice = amount.multiply(new BigDecimal(discountItems.size() / numberOfItems));
+		BigDecimal discount = totalPrice.subtract(totalDiscountPrice);
 		
 		return discount;
 	}

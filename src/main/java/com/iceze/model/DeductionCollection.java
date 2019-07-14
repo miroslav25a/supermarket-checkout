@@ -1,6 +1,8 @@
 package com.iceze.model;
 
+import java.util.Collections;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.iceze.service.Deduction;
 
@@ -9,51 +11,55 @@ import com.iceze.service.Deduction;
  * 
  * @author Miroslav
  */
-public class DeductionCollection {
-	private Map<String, Deduction> deductions;
-	private DiscountCollection discountCollection;
+public final class DeductionCollection {
+	private final Map<String, Deduction> deductions;
+	private final DiscountCollection discountCollection;
 	
 	public DeductionCollection() {
-		super();
 		this.deductions = null;
 		this.discountCollection = null;
 	}
 
-	private DeductionCollection(final Map<String, Deduction> deductions, final DiscountCollection discountCollection) {
-		super();
-		this.deductions = deductions;
-		this.discountCollection = discountCollection;
+	private DeductionCollection(final Builder builder) {
+		this.deductions = builder.deductions;
+		this.discountCollection = builder.discountCollection;
 	}
 
 	public Map<String, Deduction> getDeductions() {
-		return deductions;
+		Map<String, Deduction> newDeductionsMap = deductions.entrySet().stream()
+				.collect(Collectors.toMap(x -> x.getKey(), x -> x.getValue()));
+		return Collections.unmodifiableMap(newDeductionsMap);
 	}
 
 	public DiscountCollection getDiscountCollection() {
 		return discountCollection;
 	}
-	
-	/**
-	 * Builder class for DeductionCollection
-	 * 
-	 * @author Miroslav
-	 */
-	public static class DeductionCollectionBuilder {
+
+	public static Builder builder() {
+		return new Builder();
+	}
+
+	public static class Builder {
 		private Map<String, Deduction> deductions;
 		private DiscountCollection discountCollection;
+
+		private Builder() {
+		}
 		
-		public DeductionCollectionBuilder withDeductions(final Map<String, Deduction> deductions) {
-			this.deductions = deductions;
+		public Builder deductions(final Map<String, Deduction> deductions) {
+			Map<String, Deduction> newDeductionsMap = deductions.entrySet().stream()
+					.collect(Collectors.toMap(x -> x.getKey(), x -> x.getValue()));
+			this.deductions = Collections.unmodifiableMap(newDeductionsMap);
 			return this;
 		}
 		
-		public DeductionCollectionBuilder withDiscountCollection(final DiscountCollection discountCollection) {
+		public Builder discountCollection(final DiscountCollection discountCollection) {
 			this.discountCollection = discountCollection;
 			return this;
 		}
 		
 		public DeductionCollection build() {
-			return new DeductionCollection(this.deductions, this.discountCollection);
+			return new DeductionCollection(this);
 		}
 	}
 }

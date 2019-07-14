@@ -1,21 +1,14 @@
 package com.iceze.service;
-
-import static org.hamcrest.CoreMatchers.allOf;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.*;
 
 import java.math.BigDecimal;
 
-import org.assertj.core.util.Lists;
+import com.google.common.collect.Lists;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.iceze.model.Basket;
 import com.iceze.model.Item;
-import com.iceze.service.CheapestFreeDeduction;
 
 public class CheapestFreeDeductionTest {
 	private CheapestFreeDeduction cheapestFreeDeduction;
@@ -27,83 +20,221 @@ public class CheapestFreeDeductionTest {
 	
 	@Test
 	public void deductionReturnsForNoItems() {
-		Basket basket = new Basket(Lists.newArrayList(
-									new Item("Weetabix", new BigDecimal(2.0), "cereal")));
+		Basket basket = Basket.builder()
+				.items(Lists.newArrayList(
+						Item.builder()
+								.name("Weetabix")
+								.price(new BigDecimal(2.0))
+								.type("cereal").build()))
+				.build();
 		
 		Object deduction = this.cheapestFreeDeduction.deduction(basket, new BigDecimal(0), "fruit");
-		assertThat(deduction, is(
-				allOf(notNullValue(), instanceOf(BigDecimal.class), equalTo(new BigDecimal(0)))));
+		assertThat(deduction)
+				.isNotNull()
+				.isInstanceOf(BigDecimal.class)
+				.isEqualTo(new BigDecimal(0));
 	}
 	
 	@Test
 	public void deductionReturnsForTwoItems() {
-		Basket basket = new Basket(Lists.newArrayList(
-									new Item("Apple", new BigDecimal(1.0), "fruit"),
-									new Item("Orange", new BigDecimal(2.0), "fruit"),
-									new Item("Weetabix", new BigDecimal(2.0), "cereal")));
+		Basket basket = Basket.builder()
+				.items(Lists.newArrayList(
+						Item.builder()
+								.name("Apple")
+								.price(new BigDecimal(1.0))
+								.type("fruit")
+								.build(),
+						Item.builder()
+								.name("Orange")
+								.price(new BigDecimal(2.0))
+								.type("fruit")
+								.build(),
+						Item.builder()
+								.name("Weetabix")
+								.price(new BigDecimal(2.0))
+								.type("cereal").build()))
+				.build();
 		
 		Object deduction = this.cheapestFreeDeduction.deduction(basket, new BigDecimal(0), "fruit");
-		assertThat(deduction, is(
-				allOf(notNullValue(), instanceOf(BigDecimal.class), equalTo(new BigDecimal(0)))));
+
+		assertThat(deduction)
+				.isNotNull()
+				.isInstanceOf(BigDecimal.class)
+				.isEqualTo(new BigDecimal(0));
 	}
 	
 	@Test
 	public void deductionReturnsForThreeItems() {
-		Basket basket = new Basket(Lists.newArrayList(
-									new Item("Apple", new BigDecimal(1.0), "fruit"),
-									new Item("Orange", new BigDecimal(2.0), "fruit"),
-									new Item("Banana", new BigDecimal(3.0), "fruit"),
-									new Item("Weetabix", new BigDecimal(2.0), "cereal")));
+		Basket basket = Basket.builder()
+				.items(Lists.newArrayList(
+						Item.builder()
+								.name("Apple")
+								.price(new BigDecimal(1.0))
+								.type("fruit")
+								.build(),
+						Item.builder()
+								.name("Orange")
+								.price(new BigDecimal(2.0))
+								.type("fruit")
+								.build(),
+						Item.builder()
+								.name("Banana")
+								.price(new BigDecimal(3.0))
+								.type("fruit")
+								.build(),
+						Item.builder()
+								.name("Weetabix")
+								.price(new BigDecimal(2.0))
+								.type("cereal").build()))
+				.build();
 		
 		Object deduction = this.cheapestFreeDeduction.deduction(basket, new BigDecimal(0), "fruit");
-		assertThat(deduction, is(
-				allOf(notNullValue(), instanceOf(BigDecimal.class), equalTo(new BigDecimal(1)))));
+
+		assertThat(deduction)
+				.isNotNull()
+				.isInstanceOf(BigDecimal.class)
+				.isEqualTo(new BigDecimal(1));
 	}
 	
 	@Test
 	public void deductionReturnsForFourItems() {
-		Basket basket = new Basket(Lists.newArrayList(
-									new Item("Apple", new BigDecimal(1.0), "fruit"),
-									new Item("Orange", new BigDecimal(2.0), "fruit"),
-									new Item("Banana", new BigDecimal(3.0), "fruit"),
-									new Item("Orange", new BigDecimal(2.0), "fruit"),
-									new Item("Weetabix", new BigDecimal(2.0), "cereal")));
+		Basket basket = Basket.builder()
+				.items(Lists.newArrayList(
+						Item.builder()
+								.name("Apple")
+								.price(new BigDecimal(1.0))
+								.type("fruit")
+								.build(),
+						Item.builder()
+								.name("Orange")
+								.price(new BigDecimal(2.0))
+								.type("fruit")
+								.build(),
+						Item.builder()
+								.name("Banana")
+								.price(new BigDecimal(3.0))
+								.type("fruit")
+								.build(),
+						Item.builder()
+								.name("Orange")
+								.price(new BigDecimal(2.0))
+								.type("fruit")
+								.build(),
+						Item.builder()
+								.name("Weetabix")
+								.price(new BigDecimal(2.0))
+								.type("cereal")
+								.build()))
+				.build();
 		
 		Object deduction = this.cheapestFreeDeduction.deduction(basket, new BigDecimal(0), "fruit");
-		assertThat(deduction, is(
-				allOf(notNullValue(), instanceOf(BigDecimal.class), equalTo(new BigDecimal(1)))));
+
+		assertThat(deduction)
+				.isNotNull()
+				.isInstanceOf(BigDecimal.class)
+				.isEqualTo(new BigDecimal(1));
 	}
 	
 	@Test
 	public void deductionReturnsForSixItems() {
-		Basket basket = new Basket(Lists.newArrayList(
-									new Item("Apple", new BigDecimal(1.0), "fruit"),
-									new Item("Banana", new BigDecimal(3.0), "fruit"),
-									new Item("Banana", new BigDecimal(3.0), "fruit"),
-									new Item("Banana", new BigDecimal(3.0), "fruit"),
-									new Item("Orange", new BigDecimal(2.0), "fruit"),
-									new Item("Orange", new BigDecimal(2.0), "fruit"),
-									new Item("Weetabix", new BigDecimal(2.0), "cereal")));
+		Basket basket = Basket.builder()
+				.items(Lists.newArrayList(
+						Item.builder()
+								.name("Apple")
+								.price(new BigDecimal(1.0))
+								.type("fruit")
+								.build(),
+						Item.builder()
+								.name("Banana")
+								.price(new BigDecimal(3.0))
+								.type("fruit")
+								.build(),
+						Item.builder()
+								.name("Banana")
+								.price(new BigDecimal(3.0))
+								.type("fruit")
+								.build(),
+						Item.builder()
+								.name("Banana")
+								.price(new BigDecimal(3.0))
+								.type("fruit")
+								.build(),
+						Item.builder()
+								.name("Orange")
+								.price(new BigDecimal(2.0))
+								.type("fruit")
+								.build(),
+						Item.builder()
+								.name("Orange")
+								.price(new BigDecimal(2.0))
+								.type("fruit")
+								.build(),
+						Item.builder()
+								.name("Weetabix")
+								.price(new BigDecimal(2.0))
+								.type("cereal")
+								.build()))
+				.build();
 		
 		Object deduction = this.cheapestFreeDeduction.deduction(basket, new BigDecimal(0), "fruit");
-		assertThat(deduction, is(
-				allOf(notNullValue(), instanceOf(BigDecimal.class), equalTo(new BigDecimal(3)))));
+
+		assertThat(deduction)
+				.isNotNull()
+				.isInstanceOf(BigDecimal.class)
+				.isEqualTo(new BigDecimal(3));
 	}
 	
 	@Test
 	public void deductionReturnsForSevenItems() {
-		Basket basket = new Basket(Lists.newArrayList(
-									new Item("Apple", new BigDecimal(1.0), "fruit"),
-									new Item("Banana", new BigDecimal(3.0), "fruit"),
-									new Item("Banana", new BigDecimal(3.0), "fruit"),
-									new Item("Banana", new BigDecimal(3.0), "fruit"),
-									new Item("Orange", new BigDecimal(2.0), "fruit"),
-									new Item("Orange", new BigDecimal(2.0), "fruit"),
-									new Item("Orange", new BigDecimal(2.0), "fruit"),
-									new Item("Weetabix", new BigDecimal(2.0), "cereal")));
+		Basket basket = Basket.builder()
+				.items(Lists.newArrayList(
+						Item.builder()
+								.name("Apple")
+								.price(new BigDecimal(1.0))
+								.type("fruit")
+								.build(),
+						Item.builder()
+								.name("Banana")
+								.price(new BigDecimal(3.0))
+								.type("fruit")
+								.build(),
+						Item.builder()
+								.name("Banana")
+								.price(new BigDecimal(3.0))
+								.type("fruit")
+								.build(),
+						Item.builder()
+								.name("Banana")
+								.price(new BigDecimal(3.0))
+								.type("fruit")
+								.build(),
+						Item.builder()
+								.name("Orange")
+								.price(new BigDecimal(2.0))
+								.type("fruit")
+								.build(),
+						Item.builder()
+								.name("Orange")
+								.price(new BigDecimal(2.0))
+								.type("fruit")
+								.build(),
+						Item.builder()
+								.name("Orange")
+								.price(new BigDecimal(2.0))
+								.type("fruit")
+								.build(),
+						Item.builder()
+								.name("Weetabix")
+								.price(new BigDecimal(2.0))
+								.type("cereal")
+								.build()))
+				.build();
 		
 		Object deduction = this.cheapestFreeDeduction.deduction(basket, new BigDecimal(0), "fruit");
-		assertThat(deduction, is(
-				allOf(notNullValue(), instanceOf(BigDecimal.class), equalTo(new BigDecimal(3)))));
+
+		assertThat(deduction)
+				.isNotNull()
+				.isInstanceOf(BigDecimal.class)
+				.isEqualTo(new BigDecimal(3));
 	}
 }

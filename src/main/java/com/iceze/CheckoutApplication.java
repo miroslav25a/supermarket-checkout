@@ -5,20 +5,15 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Map;
 
-import org.assertj.core.util.Maps;
 
+import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.iceze.model.Basket;
 import com.iceze.model.DeductionCollection;
 import com.iceze.model.DiscountCollection;
 import com.iceze.model.DiscountType;
-import com.iceze.model.DeductionCollection.DeductionCollectionBuilder;
-import com.iceze.service.BasicCheckout;
-import com.iceze.service.CheapestFreeDeduction;
-import com.iceze.service.Checkout;
-import com.iceze.service.Deduction;
-import com.iceze.service.PercentageOffDeduction;
-import com.iceze.service.TwoForPriceDeduction;
+import com.iceze.service.*;
+
 /**
  * Main application class
  * 
@@ -101,10 +96,10 @@ public class CheckoutApplication {
     	Map<String, Deduction> deductions = initDeductions();
     	DiscountCollection discountCollection = loadDiscountCollection(discountFilePath);
     	
-    	DeductionCollection deductionCollection = new DeductionCollectionBuilder()
-    														.withDeductions(deductions)
-    														.withDiscountCollection(discountCollection)
-    														.build();
+    	DeductionCollection deductionCollection = DeductionCollection.builder()
+                .deductions(deductions)
+                .discountCollection(discountCollection)
+                .build();
     	
     	return deductionCollection;
     }
@@ -115,11 +110,11 @@ public class CheckoutApplication {
 	 * @return HashMap<String, Deduction>
 	 */
 	private static Map<String, Deduction> initDeductions() {
-		Map<String, Deduction> deductions = Maps.newHashMap(
-				DiscountType.CHEAPEST_FREE.name(), new CheapestFreeDeduction());
-
+		Map<String, Deduction> deductions = Maps.newHashMap();
+		deductions.put(DiscountType.CHEAPEST_FREE.name(), new CheapestFreeDeduction());
 		deductions.put(DiscountType.PERCENTAGE_OFF.name(), new PercentageOffDeduction());
 		deductions.put(DiscountType.TWO_FOR_PRICE.name(), new TwoForPriceDeduction());
+		deductions.put(DiscountType.THREE_FOR_PRICE.name(), new ThreeForPriceDeduction());
 		
 		return deductions;
 	}

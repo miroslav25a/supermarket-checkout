@@ -23,5 +23,5 @@ public interface Deduction {
 	 * @return
 	 * 			BigDecimal, total discount amount
 	 */
-	BigDecimal deduction(final Basket basket, final BigDecimal amount, final String item);
+	BigDecimal deduction(Basket basket, BigDecimal amount, String item);
 }

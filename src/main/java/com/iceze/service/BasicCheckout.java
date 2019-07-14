@@ -4,12 +4,12 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
-import org.assertj.core.util.Lists;
-
+import com.google.common.collect.Lists;
 import com.iceze.model.Basket;
 import com.iceze.model.DeductionCollection;
 import com.iceze.model.Discount;
 import com.iceze.model.Item;
+
 /**
  * The class that contains functionality for a basic shopping basket checkout.
  * 
@@ -27,13 +27,13 @@ public class BasicCheckout implements Checkout {
         
         items.forEach(item -> stringBuilder
                 .append(item.getName())
-                .append(": £")
+                .append(": Â£")
                 .append(item.getPrice())
                 .append("\n"));
 
         //total sum before discounts
         BigDecimal sum = items.stream().map(Item::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
-        stringBuilder.append("total price before discounts: £").append(sum).append("\n");
+        stringBuilder.append("total price before discounts: Â£").append(sum).append("\n");
         
         List<Discount> discounts = deductionCollection.getDiscountCollection().getDiscounts();
         Map<String, Deduction> deductions = deductionCollection.getDeductions();
@@ -43,7 +43,7 @@ public class BasicCheckout implements Checkout {
         discounts.forEach((d) -> {
         	final BigDecimal itemDiscountSum = deductions.get(d.getType()).deduction(basket, d.getAmount(), d.getItemNamesOrTypes().get(0));
         	stringBuilder.append(d.getType() + " " + d.getItemNamesOrTypes().get(0))
-        				 .append(": £")
+        				 .append(": Â£")
         				 .append(itemDiscountSum)
         				 .append("\n");
         	discountSums.add(itemDiscountSum);
@@ -54,7 +54,7 @@ public class BasicCheckout implements Checkout {
         
         //total sum after discounts
         BigDecimal totalSum = sum.subtract(totalDiscointSum);
-        stringBuilder.append("total price after discounts: £")
+        stringBuilder.append("total price after discounts: Â£")
         			 .append(totalSum)
         			 .append("\n");
 

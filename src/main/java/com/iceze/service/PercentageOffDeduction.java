@@ -17,7 +17,7 @@ public class PercentageOffDeduction implements Deduction {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public BigDecimal deduction(Basket basket, BigDecimal amount, String item) {
+	public BigDecimal deduction(final Basket basket, final BigDecimal amount, final String item) {
 		List<Item> items = basket.getItems();
 		
 		BigDecimal amountForDiscount = items.stream().filter(i -> i.getName().equals(item))
